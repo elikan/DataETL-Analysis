@@ -4,6 +4,7 @@ import sqlite3
 # Read in the CSV file into a pandas dataframe
 df = pd.read_csv('combined_transactions.csv')
 
+# Convert cents to dollars and drop cents
 df['amount_in_dollars'] = round(df['amount_cents'] / 100, 2)
 df.drop(columns='amount_cents', inplace=True)
 
