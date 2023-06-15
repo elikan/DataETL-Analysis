@@ -58,7 +58,7 @@ class Profit(Resource):
         # Fetch query results
         rows = cursor.fetchall()
 
-        # SQL query to get datetime and conver to date for that merchant
+        # SQL query to get datetime and convert to date for that merchant
         cursor.execute('''
               SELECT strftime('%Y-%m-%d', datetime) as date from purchases where merchant_type_code = ? 
               UNION ALL SELECT strftime('%Y-%m-%d', datetime) as date from returns where merchant_type_code = ?
@@ -78,13 +78,13 @@ class Profit(Resource):
                 'date': rows2
             }
             merchants.append(merchant)
-        response = {'transactions': merchants}
+        response = {'merchant': merchants}
         # Convert to JSON
         return jsonify(response)
 
 # Endpoint for all transactions of a user
 api.add_resource(Transactions, '/user/<int:num>')
-# Endpoint for totsl profet of a merchant
+# Endpoint for total profit of a merchant
 api.add_resource(Profit, '/profit/<int:num>')
 
 if __name__ == '__main__':
